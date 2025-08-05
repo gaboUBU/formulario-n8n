@@ -1,0 +1,725 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0f1419;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Gradiente animado de fondo */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+body {
+  background: linear-gradient(-45deg, #0f1419, #1a202c, #0f1419, #2d1810);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Partículas flotantes animadas */
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(100px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes float-diagonal {
+  0% {
+    transform: translate(0, 100vh) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(100vw, -100vh) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Contenedor de partículas */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Partículas individuales */
+body::before {
+  content: '';
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.4) 0%, transparent 2%),
+    radial-gradient(circle at 80% 20%, rgba(255, 107, 53, 0.3) 0%, transparent 2%),
+    radial-gradient(circle at 40% 40%, rgba(37, 99, 235, 0.3) 0%, transparent 2%),
+    radial-gradient(circle at 60% 60%, rgba(255, 107, 53, 0.2) 0%, transparent 2%);
+  background-size: 350px 350px, 450px 450px, 250px 250px, 550px 550px;
+  background-position: 0% 0%, 100% 0%, 50% 50%, 0% 100%;
+  animation: particleFloat 20s linear infinite;
+  z-index: 1;
+}
+
+@keyframes particleFloat {
+  0% {
+    background-position: 0% 0%, 100% 0%, 50% 50%, 0% 100%;
+  }
+  25% {
+    background-position: 100% 100%, 0% 100%, 100% 0%, 50% 0%;
+  }
+  50% {
+    background-position: 100% 0%, 0% 100%, 0% 0%, 100% 50%;
+  }
+  75% {
+    background-position: 0% 100%, 100% 0%, 50% 100%, 0% 50%;
+  }
+  100% {
+    background-position: 0% 0%, 100% 0%, 50% 50%, 0% 100%;
+  }
+}
+
+/* Red neuronal animada */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 107, 53, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 107, 53, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(255, 107, 53, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 107, 53, 0.06) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  animation: gridMove 30s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(20px, 20px);
+  }
+}
+
+/* Orbes de luz flotantes */
+@keyframes orb {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+.App::before,
+.App::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.App::before {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+  top: -100px;
+  left: -100px;
+  animation: orb 15s ease-in-out infinite;
+}
+
+.App::after {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+  bottom: -150px;
+  right: -150px;
+  animation: orb 20s ease-in-out infinite reverse;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.form-container {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  border-radius: 16px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 80px rgba(255, 107, 53, 0.15),
+    inset 0 0 30px rgba(255, 107, 53, 0.05);
+  overflow: hidden;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.form-container:hover {
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.5),
+    0 0 100px rgba(255, 107, 53, 0.2),
+    inset 0 0 30px rgba(255, 107, 53, 0.08);
+  transform: translateY(-2px);
+}
+
+.form-header {
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+  color: white;
+  padding: 40px 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.form-header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-header p {
+  font-size: 16px;
+  opacity: 0.95;
+  position: relative;
+  z-index: 1;
+}
+
+.lead-form {
+  padding: 40px 30px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #e2e8f0;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: rgba(15, 23, 42, 0.6);
+  color: #e2e8f0;
+  backdrop-filter: blur(5px);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #ff6b35;
+  box-shadow: 
+    0 0 0 3px rgba(255, 107, 53, 0.2),
+    0 0 20px rgba(255, 107, 53, 0.1);
+  background-color: rgba(15, 23, 42, 0.8);
+}
+
+.form-group input::placeholder {
+  color: #64748b;
+}
+
+/* Estilo para options del select */
+.form-group select option {
+  background-color: #1e293b;
+  color: #e2e8f0;
+}
+
+/* NUEVOS ESTILOS PARA INPUT DE TELÉFONO INTERNACIONAL */
+
+/* Contenedor principal del input de teléfono */
+.phone-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Selector de país */
+.country-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  background-color: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  border-radius: 10px;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  white-space: nowrap;
+  font-size: 16px;
+  min-width: 120px;
+}
+
+.country-selector:hover {
+  background-color: rgba(15, 23, 42, 0.8);
+  border-color: rgba(255, 107, 53, 0.5);
+}
+
+.country-selector:focus {
+  outline: none;
+  border-color: #ff6b35;
+  box-shadow: 
+    0 0 0 3px rgba(255, 107, 53, 0.2),
+    0 0 20px rgba(255, 107, 53, 0.1);
+}
+
+.country-selector .flag {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.country-selector .code {
+  font-weight: 600;
+  color: #ff6b35;
+}
+
+.dropdown-arrow {
+  margin-left: 4px;
+  transition: transform 0.3s ease;
+}
+
+.country-selector:hover .dropdown-arrow {
+  transform: translateY(1px);
+}
+
+/* Input del número de teléfono */
+.phone-number-input {
+  flex: 1;
+  max-width: calc(100% - 132px);
+}
+
+/* Dropdown de países */
+.country-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 8px;
+  background: rgba(30, 41, 59, 0.98);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  border-radius: 10px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(255, 107, 53, 0.1);
+  z-index: 1000;
+  max-height: 350px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Búsqueda de países */
+.country-search {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  border-radius: 8px;
+  background-color: rgba(15, 23, 42, 0.6);
+  color: #e2e8f0;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+  background-color: rgba(15, 23, 42, 0.8);
+}
+
+.search-input::placeholder {
+  color: #64748b;
+}
+
+/* Lista de países */
+.country-list {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Estilo de la barra de scroll */
+.country-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.country-list::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.3);
+}
+
+.country-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 107, 53, 0.3);
+  border-radius: 4px;
+}
+
+.country-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 107, 53, 0.5);
+}
+
+/* Opción de país */
+.country-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+}
+
+.country-option:hover {
+  background: rgba(255, 107, 53, 0.15);
+  color: #ffffff;
+}
+
+.country-option:focus {
+  outline: none;
+  background: rgba(255, 107, 53, 0.2);
+}
+
+.country-option .flag {
+  font-size: 20px;
+  line-height: 1;
+  width: 24px;
+  text-align: center;
+}
+
+.country-option .country-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.country-option .country-code {
+  color: #ff6b35;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* Animación de apertura del dropdown */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.country-dropdown {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* FIN DE ESTILOS DE INPUT DE TELÉFONO */
+
+.submit-button {
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.submit-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.submit-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 10px 25px rgba(255, 107, 53, 0.3),
+    0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+.submit-button.submitting {
+  background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submit-button:disabled {
+  background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.message {
+  margin-top: 20px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  backdrop-filter: blur(5px);
+}
+
+.message.success {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.message.error {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Logo o marca de agua animada */
+.form-container::after {
+  content: '⚡';
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 100px;
+  opacity: 0.03;
+  transform: rotate(-15deg);
+  pointer-events: none;
+  animation: electricPulse 2s ease-in-out infinite;
+}
+
+@keyframes electricPulse {
+  0%, 100% { 
+    opacity: 0.03;
+    transform: rotate(-15deg) scale(1);
+  }
+  50% { 
+    opacity: 0.06;
+    transform: rotate(-15deg) scale(1.1);
+  }
+}
+
+/* Pantalla de éxito */
+.success-container {
+  padding: 60px 30px;
+  text-align: center;
+  color: #e2e8f0;
+}
+
+.success-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+  animation: bounce 0.5s ease-out;
+}
+
+@keyframes bounce {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.success-container h2 {
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.success-container p {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+.new-form-button {
+  margin-top: 30px;
+  padding: 14px 28px;
+  background: transparent;
+  color: #ff6b35;
+  border: 2px solid #ff6b35;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.new-form-button:hover {
+  background: #ff6b35;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .form-container {
+    margin: 20px;
+    border-radius: 12px;
+  }
+  
+  .form-header {
+    padding: 30px 20px;
+  }
+  
+  .lead-form {
+    padding: 30px 20px;
+  }
+  
+  .form-header h1 {
+    font-size: 26px;
+  }
+  
+  .App::before,
+  .App::after {
+    display: none; /* Ocultar orbes en móvil para mejor performance */
+  }
+  
+  /* Ajustes para el input de teléfono en móvil */
+  .phone-input-container {
+    gap: 12px;
+  }
+  
+  .country-selector {
+    min-width: 110px;
+  }
+  
+  .phone-number-input {
+    max-width: 100%;
+  }
+  
+  .country-dropdown {
+    position: fixed;
+    left: 20px;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    max-height: 70vh;
+    max-width: none;
+  }
+}
